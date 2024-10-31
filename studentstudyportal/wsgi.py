@@ -8,11 +8,14 @@ https://docs.djangoproject.com/en/5.0/howto/deployment/wsgi/
 """
 
 import os
+import sys
+import traceback
 
-from django.core.wsgi import get_wsgi_application
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'studentstudyportal.settings')
-
-application = get_wsgi_application()
-
-app = application
+try:
+    from django.core.wsgi import get_wsgi_application
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'studentstudyportal.settings')
+    application = get_wsgi_application()
+except Exception as e:
+    # Log the error for debugging
+    print("Error loading application:", str(e))
+    traceback.print_exc()
